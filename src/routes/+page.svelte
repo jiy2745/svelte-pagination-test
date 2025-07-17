@@ -1,3 +1,5 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://svelte.dev/docs/kit">svelte.dev/docs/kit</a> to read the documentation</p>
-<p>Test</p>
+<script>
+    import PostCard from "$lib/components/PostCard.svelte";
+</script>
+
+<PostCard />
