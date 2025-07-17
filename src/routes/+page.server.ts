@@ -1,4 +1,5 @@
 import allPosts from "$lib/data/posts.json";
+import { redirect } from "@sveltejs/kit";
 import type { PostSummary } from "$lib/types";
 import type { PageServerLoad } from "./$types";
 
@@ -12,6 +13,14 @@ export const load: PageServerLoad = async ({ url }) => {
         offset,
         offset + POSTS_PER_PAGE,
     );
+
+    if (currentPage < 1) {
+        url.searchParams.set("page", "1");
+        throw redirect(307, url.toString());
+    } else if (currentPage > totalPages) {
+        url.searchParams.set("page", totalPages.toString());
+        throw redirect(307, url.toString());
+    }
 
     return { slicedPostSummary, currentPage, totalPages };
 };
