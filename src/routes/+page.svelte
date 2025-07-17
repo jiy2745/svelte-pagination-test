@@ -1,6 +1,5 @@
 <script lang="ts">
     import PostCard from "$lib/components/PostCard.svelte";
-    import type { PostSummary } from "$lib/types";
     import type { PageData } from "./$types";
 
     export let data: PageData;
@@ -10,13 +9,17 @@
     $: navArray = makeNavArray(currentPage);
 
     function makeNavArray(_currentPage: number): number[] {
-        return [
+        let _navArray: number[] = [
             Math.floor((_currentPage - 1) / 5) * 5 + 1,
             Math.floor((_currentPage - 1) / 5) * 5 + 2,
             Math.floor((_currentPage - 1) / 5) * 5 + 3,
             Math.floor((_currentPage - 1) / 5) * 5 + 4,
             Math.floor((_currentPage - 1) / 5) * 5 + 5,
         ];
+
+        _navArray = _navArray.filter((n) => n <= totalPages);
+
+        return _navArray;
     }
 </script>
 
