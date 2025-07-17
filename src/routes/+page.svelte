@@ -8,14 +8,16 @@
     $: totalPages = data.totalPages;
     $: navArray = makeNavArray(currentPage);
 
+    const NAV_LENGTH: number = 5;
+
     function makeNavArray(_currentPage: number): number[] {
-        let _navArray: number[] = [
-            Math.floor((_currentPage - 1) / 5) * 5 + 1,
-            Math.floor((_currentPage - 1) / 5) * 5 + 2,
-            Math.floor((_currentPage - 1) / 5) * 5 + 3,
-            Math.floor((_currentPage - 1) / 5) * 5 + 4,
-            Math.floor((_currentPage - 1) / 5) * 5 + 5,
-        ];
+        let _navArray: number[] = [];
+
+        for (let i = 1; i < NAV_LENGTH + 1; i++) {
+            _navArray.push(
+                Math.floor((_currentPage - 1) / NAV_LENGTH) * NAV_LENGTH + i,
+            );
+        }
 
         _navArray = _navArray.filter((n) => n <= totalPages);
 
@@ -32,7 +34,7 @@
 <nav class="flex justify-center gap-x-4 my-4">
     <a href="?page={currentPage - 1}">이전</a>
     {#each navArray as n}
-        <a href="?page={n}">{n}</a>
+        <a href="?page={n}" class:font-bold={n === currentPage}>{n}</a>
     {/each}
     <a href="?page={currentPage + 1}">다음</a>
 </nav>
