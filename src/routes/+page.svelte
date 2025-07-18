@@ -25,10 +25,12 @@
     }
 </script>
 
-<div class="flex flex-col">
-    {#each slicedPostSummary as data}
-        <PostCard {data} />
-    {/each}
+<div class="flex justify-center">
+    <div class="flex flex-col max-w-3xl">
+        {#each slicedPostSummary as data}
+            <PostCard {data} />
+        {/each}
+    </div>
 </div>
 
 <nav class="flex justify-center gap-x-4 my-4">
